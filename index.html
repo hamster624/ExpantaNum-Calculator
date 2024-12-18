@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExpantaNum Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="ExpantaNum.js"></script>
+  <script src="calculator.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Calculator</h1>
+
+    <!-- Number Inputs and Scale Button -->
+    <div class="input-group-container">
+      <div class="input-group">
+        <label for="num1">Number 1:</label>
+        <input type="text" id="num1" value="10" />
+      </div>
+
+      <div class="input-group-scale" id="scaleButtonContainer">
+        <button onclick="toggleScalePopup()">Change GUI Size</button>
+      </div>
+    </div>
+
+    <div class="scale-popup" id="scalePopup">
+      <button onclick="changeScale(0.8)">70%</button>
+      <button onclick="changeScale(1.15)">100%</button>
+      <button onclick="changeScale(1.875)">150%</button>
+    </div>
+
+    <div class="input-group">
+      <label for="num2">Number 2:</label>
+      <input type="text" id="num2" value="5" />
+    </div>
+
+    <div class="button-group">
+      <button onclick="performOperation('add')"> Add (+)</button>
+      <button onclick="performOperation('subtract')"> Subtract (-)</button>
+      <button onclick="performOperation('multiply')"> Multiply (×)</button>
+      <button onclick="performOperation('divide')"> Divide (÷)</button>
+      <button onclick="performOperation('exponentiate')"> Exponent (^) </button>
+      <button onclick="performOperation('tetrate')">Tetrate (^^)</button>
+      <button onclick="performOperation('pentate')">Pentate (^^^)</button>
+      <button onclick="performOperation('hexate')">Hexate (^^^^)</button>
+      <button onclick="performOperation('heptate')">Heptate    (5*^)</button>
+      <button onclick="performOperation('octate')">Octate    (6*^)</button>
+      <button onclick="performOperation('nonate')">Nonate    (7*^)</button>
+      <button onclick="performOperation('decate')">Decate    (8*^)</button>
+      <button onclick="performOperation('unodecate')">Unodecate    (9*^)</button>
+      <button onclick="performOperation('dodecate')">Dodecate    (10*^)</button>
+      <button onclick="performOperation('tridocate')">Tridocate    (11*^)</button>
+      <button onclick="performOperation('quadocate')">Quadocate    (12*^)</button>
+      <button onclick="performOperation('quindecate')">Quindecate    (13*^)</button>
+      <button onclick="performOperation('sedecate')">Sedecate    (14*^)</button>
+      <button onclick="performOperation('septendecate')">Septendecate    (15*^)</button>
+      <button onclick="performOperation('1000arrow')">1000*^</button>
+      <button onclick="performOperation('10000arrow')">10000*^</button>
+      <button onclick="performOperation('100000arrow')">100000*^</button>
+      <button onclick="performOperation('1000000arrow')">1000000*^</button>
+      <button onclick="performOperation('factorial')">factorial</button>
+      <button onclick="performOperation('sqrt')">Sqrt √</button>
+      <button onclick="performOperation('log')">log</button>
+      <button onclick="performOperation('logb')">log Base (num2 is base)</button>
+      <button onclick="performOperation('slog')">slog</button>
+      <button onclick="showNotationGuide()">Notation Guide</button>
+    </div>
+
+    <div class="result">
+      <h2>Result:</h2>
+      <p id="result">Result will be displayed here.</p>
+    </div>
+
+    <div class="theme-toggle">
+      <button onclick="toggleTheme()">Toggle Black/White Theme</button>
+    </div>
+  </div>
+
+  <div id="notationModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeNotationGuide()">×</span>
+      <h2>Notation Guide</h2>
+      <p>E100#2#3#2 (hyper-e notation) represents E100^E100 which is the first step (E100#2). Then after you get the result you do result^result^result (E100#2#3) and then that result^that result.</p>
+      <p>If you see stuff like (#1^4) it just means #1#1#1#1. </p>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("light-theme");
+    }
+
+    function toggleScalePopup() {
+      const popup = document.getElementById("scalePopup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    function changeScale(scale) {
+      const container = document.querySelector('.container');
+      container.style.transform = `scale(${scale})`;
+      document.querySelector('#scalePopup').style.display = 'none';
+    }
+
+    window.onload = function() {
+      changeScale(1.15);
+      showDeviceModal();
+    };
+
+    function showDeviceModal() {
+      const modal = document.createElement('div');
+      modal.classList.add('grayscale');
+
+      modal.innerHTML = `
+        <div class="device-modal">
+          <h2>Are you on a PC?</h2>
+          <button onclick="setDeviceType('pc')">Yes, I'm on PC</button>
+          <button onclick="setDeviceType('not-pc')">No, I'm not on PC</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function setDeviceType(type) {
+      const modal = document.querySelector('.grayscale');
+      modal.remove();
+      if (type === 'not-pc') {
+        changeScale(0.8);
+        adjustForNonPC();
+        hideScaleButton();
+      }
+    }
+
+    function adjustForNonPC() {
+      const container = document.querySelector('.container');
+      container.style.fontSize = '0.8em';
+      document.querySelectorAll('button').forEach(button => {
+        button.style.fontSize = '0.8em';
+        button.style.padding = '8px 10px';
+      });
+    }
+
+    function hideScaleButton() {
+      const scaleButton = document.getElementById("scaleButtonContainer");
+      scaleButton.style.display = "none";
+    }
+
+    function showNotationGuide() {
+      document.getElementById('notationModal').style.display = 'block';
+    }
+
+    function closeNotationGuide() {
+      document.getElementById('notationModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
