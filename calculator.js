@@ -33,52 +33,52 @@ function performOperation(operation) {
       result = num1.pentate(num2);
       break;
     case 'hexate':
-      result = num1.hexate(num2);
+      result = num1.hexate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'heptate':
-      result = num1.heptate(num2);
+      result = num1.heptate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'octate':
-      result = num1.octate(num2);
+      result = num1.octate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'nonate':
-      result = num1.nonate(num2);
+      result = num1.nonate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'decate':
-      result = num1.decate(num2);
+      result = num1.decate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'unodecate':
-      result = num1.unodecate(num2);
+      result = num1.unodecate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'dodecate':
-      result = num1.dodecate(num2);
+      result = num1.dodecate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'tridocate':
-      result = num1.tridocate(num2);
+      result = num1.tridocate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'quadocate':
-      result = num1.quadocate(num2);
+      result = num1.quadocate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'quindecate':
-      result = num1.quindecate(num2);
+      result = num1.quindecate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'sedecate':
-      result = num1.sedecate(num2);
+      result = num1.sedecate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'septendecate':
-      result = num1.septendecate(num2);
+      result = num1.septendecate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case '1000arrow':
-      result = num1.big(num2);
+      result = num1.big(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case '10000arrow':
-      result = num1.big2(num2);
+      result = num1.big2(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case '100000arrow':
-      result = num1.big3(num2);
+      result = num1.big3(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case '1000000arrow':
-      result = num1.big4(num2);
+      result = num1.big4(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'factorial':
       result = num1.factorial();
@@ -132,7 +132,7 @@ function repeatLastOperation() {
     if (lastOperation) {
       performOperation(lastOperation.operation);
     }
-  }, 100); // Execute every 10 seconds
+  }, 100);
 }
 
 repeatLastOperation();
