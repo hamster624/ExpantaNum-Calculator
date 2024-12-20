@@ -92,6 +92,9 @@ function performOperation(operation) {
     case 'slog':
       result = num1.slog();
       break;
+    case '2slog':
+      result = num1.slog().slog();
+      break;
     case 'logb':
       result = num2.logBase(num1);
       break;
