@@ -97,7 +97,7 @@ function performOperation(operation) {
       result = num1.slog().slog();
       break;
     case 'logb':
-      result = num2.logBase(num1);
+      result = num1.logBase(num2);
       break;
   }
 
