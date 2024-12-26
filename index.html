@@ -71,17 +71,20 @@
       <h2>Result:</h2>
       <p id="result">Result will be displayed here.</p>
     </div>
-
+  <div class="notation-toggle">
+    <button onclick="toggleNotation()">Toggle Notation</button>
+  </div>
     <div class="theme-toggle">
       <button onclick="toggleTheme()">Toggle Black/White Theme</button>
     </div>
   </div>
 
+  
   <div id="notationModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeNotationGuide()">×</span>
       <h2>Notation Guide</h2>
-      <p>Hyper-e Notation: I dont really understand it so just look at these examples and figure it out. E303#6 = EEEEEE303 = 10^10^10^10^10^10^303, E100#3=E10^10^100=10^10^10^100 E100#100#2 = E100#(E100#100).</p>
+      <p>E100#2#3#2 (hyper-e notation) represents E100^E100 which is the first step (E100#2). Then after you get the result you do result^result^result (E100#2#3) and then that result^that result.</p>
       <p>If you see stuff like (#1^4) it just means #1#1#1#1. </p>
     </div>
   </div>
