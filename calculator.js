@@ -104,15 +104,9 @@ function performOperation(operation) {
   lastOperation = { operation, num1: num1Str, num2: num2Str };
 }
 
-function notate(expnum, fp) {
+function notate(expnum) {
   const exp = ExpantaNum(expnum);
-  if (exp.lt("1e12")) {
-    return formatNumberWithCommas(exp.toNumber().toFixed(fp));
-  } else if (exp.slog(10).lt(1000000000000000) && exp.slog(10).gte(1.5)) {
-    return formatNumberWithCommas(exp.toExponential(fp));
-  } else if (exp.lt("10^^1000000000000000")) {
-    return "10^^" + notate(exp.slog(10), fp);
-  } else {
+
     let str = exp.toHyperE();
     str = str.replace(/#0/g, '');
     str = str.replace(/(#1)+/g, (match, p1) => {
@@ -124,7 +118,6 @@ function notate(expnum, fp) {
     });
     return str;
   }
-}
 
 function formatNumberWithCommas(num) {
   return num.toLocaleString();
