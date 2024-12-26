@@ -433,3 +433,17 @@ body.light-theme .modal-content p {
   font-size: 1em;
   cursor: pointer;
 }
+.discord-link {
+  text-align: center;
+  margin-block-start: 20px;
+}
+
+.discord-link a {
+  font-size: 16px;
+  color: #7289DA;
+  text-decoration: none;
+}
+
+.discord-link a:hover {
+  text-decoration: underline;
+}
