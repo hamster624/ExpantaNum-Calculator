@@ -1,3 +1,4 @@
+let useOldNotation = true;
 let E = x => new ExpantaNum(x);
 
 let lastOperation = null;
@@ -104,9 +105,40 @@ function performOperation(operation) {
   lastOperation = { operation, num1: num1Str, num2: num2Str };
 }
 
-function notate(expnum) {
+
+
+function toggleNotation() {
+  useOldNotation = !useOldNotation;
+  const resultElement = document.getElementById("result");
+  const currentResult = resultElement.textContent;
+  if (lastOperation) {
+    performOperation(lastOperation.operation);
+  }
+}
+
+function notate(expnum, fp) {
   const exp = ExpantaNum(expnum);
 
+  if (useOldNotation) {
+    if (exp.lt("1e12")) {
+      return formatNumberWithCommas(exp.toNumber().toFixed(fp));
+    } else if (exp.slog(10).lt(1000000000000000) && exp.slog(10).gte(1.5)) {
+      return formatNumberWithCommas(exp.toExponential(fp));
+    } else if (exp.lt("10^^1000000000000000")) {
+      return "10^^" + notate(exp.slog(10), fp);
+    } else {
+      let str = exp.toHyperE();
+      str = str.replace(/#0/g, '');
+      str = str.replace(/(#1)+/g, (match, p1) => {
+        const repeatCount = match.length / p1.length;
+        if (repeatCount === 1) {
+          return '';
+        }
+        return `(#1^${repeatCount})`;
+      });
+      return str;
+    }
+  } else {
     let str = exp.toHyperE();
     str = str.replace(/#0/g, '');
     str = str.replace(/(#1)+/g, (match, p1) => {
@@ -118,6 +150,7 @@ function notate(expnum) {
     });
     return str;
   }
+}
 
 function formatNumberWithCommas(num) {
   return num.toLocaleString();
