@@ -141,10 +141,10 @@ function notate(expnum, fp) {
     case 'my':
       if (exp.lt("1e12")) {
         return commaFormat(exp, 2);
-      } else if (exp.slog(10).lt(1000000000000000) && exp.slog(10).gte(1.5)) {
+      } else if (exp.slog(10).lt(8) && exp.slog(10).gte(1.5)) {
         return (exp.toExponential(fp));
-      } else if (exp.lt("10^^1000000000000000")) {
-        return "10^^" + notate(exp.slog(10), fp);
+      } else if (exp.slog(10).gte(8) && exp.slog(10).lt(1000)) {
+        return format(exp, 2, small=false);
       } else {
         let str = exp.toHyperE();
         str = str.replace(/#0/g, '');
