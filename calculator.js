@@ -1,4 +1,4 @@
-let useOldNotation = true;
+let notationFormat = 'expanta';
 let E = x => new ExpantaNum(x);
 
 let lastOperation = null;
@@ -97,7 +97,7 @@ function performOperation(operation) {
       result = num1.slog().slog();
       break;
     case 'logb':
-      result = num1.logBase(num2);
+      result = num2.logBase(num1);
       break;
   }
 
@@ -107,10 +107,16 @@ function performOperation(operation) {
 
 
 
-function toggleNotation() {
-  useOldNotation = !useOldNotation;
+function toggleNotationPopup() {
+  const popup = document.getElementById("notationPopup");
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+}
+
+function setNotation(format) {
+  notationFormat = format;
+  toggleNotationPopup();
+
   const resultElement = document.getElementById("result");
-  const currentResult = resultElement.textContent;
   if (lastOperation) {
     performOperation(lastOperation.operation);
   }
@@ -119,36 +125,30 @@ function toggleNotation() {
 function notate(expnum, fp) {
   const exp = ExpantaNum(expnum);
 
-  if (useOldNotation) {
-    if (exp.lt("1e12")) {
-      return formatNumberWithCommas(exp.toNumber().toFixed(fp));
-    } else if (exp.slog(10).lt(1000000000000000) && exp.slog(10).gte(1.5)) {
-      return formatNumberWithCommas(exp.toExponential(fp));
-    } else if (exp.lt("10^^1000000000000000")) {
-      return "10^^" + notate(exp.slog(10), fp);
-    } else {
-      let str = exp.toHyperE();
-      str = str.replace(/#0/g, '');
-      str = str.replace(/(#1)+/g, (match, p1) => {
-        const repeatCount = match.length / p1.length;
-        if (repeatCount === 1) {
-          return '';
-        }
-        return `(#1^${repeatCount})`;
-      });
-      return str;
-    }
-  } else {
-    let str = exp.toHyperE();
-    str = str.replace(/#0/g, '');
-    str = str.replace(/(#1)+/g, (match, p1) => {
-      const repeatCount = match.length / p1.length;
-      if (repeatCount === 1) {
-        return '';
+  switch (notationFormat) {
+    case 'hyper':
+      return exp.toHyperE();
+    case 'my':
+      if (exp.lt("1e12")) {
+        return formatNumberWithCommas(exp.toNumber().toFixed(fp));
+      } else if (exp.slog(10).lt(1000000000000000) && exp.slog(10).gte(1.5)) {
+        return formatNumberWithCommas(exp.toExponential(fp));
+      } else if (exp.lt("10^^1000000000000000")) {
+        return "10^^" + notate(exp.slog(10), fp);
+      } else {
+        let str = exp.toHyperE();
+        str = str.replace(/#0/g, '');
+        str = str.replace(/(#1)+/g, (match, p1) => {
+          const repeatCount = match.length / p1.length;
+          if (repeatCount === 1) {
+            return '';
+          }
+          return `(#1^${repeatCount})`;
+        });
+        return str;
       }
-      return `(#1^${repeatCount})`;
-    });
-    return str;
+    case 'expanta':
+      return format(exp, 2, small = false);
   }
 }
 
