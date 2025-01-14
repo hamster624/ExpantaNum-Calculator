@@ -127,7 +127,17 @@ function notate(expnum, fp) {
 
   switch (notationFormat) {
     case 'hyper':
-      return exp.toHyperE();
+      let str = exp.toHyperE();
+      str = str.replace(/#0/g, '');
+      str = str.replace(/(#1)+/g, (match, p1) => {
+        const repeatCount = match.length / p1.length;
+        if (repeatCount === 1) {
+          return '';
+        }
+        return `(#1^${repeatCount})`;
+      });
+      return str;
+
     case 'my':
       if (exp.lt("1e12")) {
         return formatNumberWithCommas(exp.toNumber().toFixed(fp));
@@ -147,8 +157,9 @@ function notate(expnum, fp) {
         });
         return str;
       }
+
     case 'expanta':
-      return format(exp, 2, small = false);
+      return format(exp, 2, small=false);
   }
 }
 
