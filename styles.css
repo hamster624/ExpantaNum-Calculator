@@ -6,7 +6,8 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #001f3f, #0074d9);
+  background: linear-gradient(120deg, #001f3f, #0074d9, #39a0ed, #001f3f);
+  background-size: 400% 400%;
   color: #ecf0f1;
   display: flex;
   justify-content: center;
@@ -15,6 +16,19 @@ body {
   padding: 10px;
   overflow: hidden;
   transition: background-color 0.5s ease, color 0.5s ease;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body.light-theme {
@@ -177,7 +191,7 @@ body.light-theme button {
 }
 
 button {
-  background-color: #3498db;
+  background: linear-gradient(145deg, #3498db, #2980b9, #1e6f8e);
   color: white;
   border: none;
   padding: 6px;
@@ -185,18 +199,18 @@ button {
   font-weight: 600;
   border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
-  background-color: #2980b9;
+  background: linear-gradient(145deg, #4a9edb, #3498db, #267bb0);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
   transform: translateY(-3px) scale(1.05);
 }
 
 button:active {
-  background-color: #1e6f8e;
+  background: linear-gradient(145deg, #2a83b5, #2168a3, #1a5278);
   transform: scale(0.95);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -446,4 +460,33 @@ body.light-theme .modal-content p {
 
 .discord-link a:hover {
   text-decoration: underline;
+}
+.notation-popup {
+  display: none;
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  z-index: 10;
+}
+
+.notation-popup button {
+  display: block;
+  background: linear-gradient(145deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.notation-popup button:hover {
+  background: linear-gradient(145deg, #4a9edb, #3498db);
 }
