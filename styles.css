@@ -467,26 +467,74 @@ body.light-theme .modal-content p {
   inset-block-start: 50%;
   inset-inline-start: 50%;
   transform: translate(-50%, -50%);
-  background: #fff;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  padding: 20px;
-  z-index: 10;
+  background: linear-gradient(145deg, #29256e, #18bee7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 -1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 25px 20px;
+  z-index: 15;
+  inline-size: 300px;
+  text-align: center;
+  animation: popupFadeIn 0.3s ease-out;
+}
+
+.notation-popup h2 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-block-end: 15px;
+  font-weight: 700;
 }
 
 .notation-popup button {
   display: block;
-  background: linear-gradient(145deg, #3498db, #2980b9);
-  color: white;
+  background: linear-gradient(145deg, #3498db, #1e6f8e);
+  color: #fff;
   border: none;
-  padding: 10px 20px;
-  margin: 10px 0;
-  font-size: 14px;
-  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 10px auto;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  inline-size: 90%;
 }
 
 .notation-popup button:hover {
-  background: linear-gradient(145deg, #4a9edb, #3498db);
+  background: linear-gradient(145deg, #4a9edb, #267bb0);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.notation-popup button:active {
+  background: linear-gradient(145deg, #267bb0, #1e6f8e);
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.notation-popup-close {
+  position: absolute;
+  inset-inline-end: 10px;
+  inset-block-start: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.notation-popup-close:hover {
+  color: #2c3e50;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
