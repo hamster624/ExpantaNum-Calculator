@@ -140,9 +140,9 @@ function notate(expnum, fp) {
 
     case 'my':
       if (exp.lt("1e12")) {
-        return formatNumberWithCommas(exp.toNumber().toFixed(fp));
+        return commaFormat(exp, 2);
       } else if (exp.slog(10).lt(1000000000000000) && exp.slog(10).gte(1.5)) {
-        return formatNumberWithCommas(exp.toExponential(fp));
+        return (exp.toExponential(fp));
       } else if (exp.lt("10^^1000000000000000")) {
         return "10^^" + notate(exp.slog(10), fp);
       } else {
@@ -157,16 +157,10 @@ function notate(expnum, fp) {
         });
         return str;
       }
-
     case 'expanta':
       return format(exp, 2, small=false);
   }
 }
-
-function formatNumberWithCommas(num) {
-  return num.toLocaleString();
-}
-
 function repeatLastOperation() {
   setInterval(() => {
     if (lastOperation) {
