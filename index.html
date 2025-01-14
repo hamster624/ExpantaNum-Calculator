@@ -6,6 +6,7 @@
   <title>Calculator</title>
   <link rel="stylesheet" href="styles.css">
   <script src="ExpantaNum.js"></script>
+  <script src="format.js"></script>
   <script src="calculator.js"></script>
 </head>
 <body>
@@ -71,9 +72,14 @@
       <h2>Result:</h2>
       <p id="result">Result will be displayed here.</p>
     </div>
-  <div class="notation-toggle">
-    <button onclick="toggleNotation()">Toggle Notation</button>
-  </div>  
+    <div class="notation-toggle">
+      <button onclick="toggleNotationPopup()">Change Notation</button>
+    </div>    
+    <div class="notation-popup" id="notationPopup">
+      <button onclick="setNotation('hyper')">Only Hyper</button>
+      <button onclick="setNotation('my')">My</button>
+      <button onclick="setNotation('expanta')">ExpantaNum Format</button>
+    </div>    
     <div class="theme-toggle">
       <button onclick="toggleTheme()">Toggle Black/White Theme</button>
     </div>  
@@ -81,9 +87,6 @@
     <a href="https://discord.gg/xAmHhcXTJZ" target="_blank">Join our Discord Server</a>
   </div>
   </div>
-
-  
-  
   <div id="notationModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeNotationGuide()">×</span>
