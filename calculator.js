@@ -166,7 +166,7 @@ function repeatLastOperation() {
     if (lastOperation) {
       performOperation(lastOperation.operation);
     }
-  }, 10);
+  }, 100);
 }
 
 repeatLastOperation();
