@@ -115,11 +115,6 @@ function toggleNotationPopup() {
 function setNotation(format) {
   notationFormat = format;
   toggleNotationPopup();
-
-  const resultElement = document.getElementById("result");
-  if (lastOperation) {
-    performOperation(lastOperation.operation);
-  }
 }
 
 function notate(expnum, fp) {
@@ -166,7 +161,7 @@ function repeatLastOperation() {
     if (lastOperation) {
       performOperation(lastOperation.operation);
     }
-  }, 100);
+  }, 10);
 }
 
 repeatLastOperation();
