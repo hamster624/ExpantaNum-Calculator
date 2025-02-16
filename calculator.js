@@ -99,6 +99,9 @@ function performOperation(operation) {
     case 'logb':
       result = num2.logBase(num1);
       break;
+    case 'custom_sqrt':
+      result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2));
+      break;
   }
 
   document.getElementById("result").textContent = `${notate(result, 6)}`;
@@ -115,6 +118,11 @@ function toggleNotationPopup() {
 function setNotation(format) {
   notationFormat = format;
   toggleNotationPopup();
+
+  const resultElement = document.getElementById("result");
+  if (lastOperation) {
+    performOperation(lastOperation.operation);
+  }
 }
 
 function notate(expnum, fp) {
@@ -153,7 +161,16 @@ function notate(expnum, fp) {
         return str;
       }
     case 'expanta':
-      return format(exp, 2, small=false);
+      if (exp.lt("E10#5")&& exp.gte("E10#4"))
+        return "eeee" + (exp.log10().log10().log10().log10());
+      else if (exp.lt("E10#4")&& exp.gte("E10#3"))
+        return "eee" + (exp.log10().log10().log10());
+      else if (exp.lt("E10#3")&& exp.gte("E10#2"))
+        return "ee" + (exp.log10().log10());
+      else if (exp.gte("E10#5"))
+        return format(exp, 2, small=false);
+      else if (exp.lt("E10#2"))
+        return format(exp, 2, small=false);
   }
 }
 function repeatLastOperation() {
