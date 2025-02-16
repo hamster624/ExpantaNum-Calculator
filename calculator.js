@@ -4,8 +4,8 @@ let E = x => new ExpantaNum(x);
 let lastOperation = null;
 
 function performOperation(operation) {
-  const num1Str = document.getElementById("num1").value;
-  const num2Str = document.getElementById("num2").value;
+  const num1Str = document.getElementById("num1").value.replace(/,/g, '');
+  const num2Str = document.getElementById("num2").value.replace(/,/g, '');
 
   const num1 = E(num1Str);
   const num2 = E(num2Str);
@@ -97,7 +97,7 @@ function performOperation(operation) {
       result = num1.slog().slog();
       break;
     case 'logb':
-      result = num2.logBase(num1);
+      result = num1.logBase(num2);
       break;
     case 'custom_sqrt':
       result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2));
