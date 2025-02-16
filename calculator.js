@@ -168,9 +168,9 @@ function notate(expnum, fp) {
       else if (exp.lt("E10#3")&& exp.gte("E10#2"))
         return "ee" + (exp.log10().log10());
       else if (exp.gte("E10#5"))
-        return format(exp, 2, small=false);
+        return format(exp, 6, small=false);
       else if (exp.lt("E10#2"))
-        return format(exp, 2, small=false);
+        return format(exp, 6, small=false);
   }
 }
 function repeatLastOperation() {
