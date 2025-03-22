@@ -102,6 +102,9 @@ function performOperation(operation) {
     case 'custom_sqrt':
       result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2));
       break;
+    case 'ssqrt':
+      result = num1.ssqrt();
+      break;
   }
 
   document.getElementById("result").textContent = `${notate(result, 6)}`;
