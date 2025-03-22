@@ -31,7 +31,7 @@ function performOperation(operation) {
       result = num1.tetr(num2);
       break;
     case 'pentate':
-      result = num1.pentate(num2);
+      result = num1.pentate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
       break;
     case 'hexate':
       result = num1.hexate(num2); // Custom operation which means ExpantaNum doesnt have it while my modified one has it
@@ -85,10 +85,10 @@ function performOperation(operation) {
       result = num1.factorial();
       break;
     case 'sqrt':
-      result = num1.sqrt();
+      result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(2));
       break;
     case 'log':
-      result = num1.log10(num2);
+      result = num1.log10();
       break;
     case 'slog':
       result = num1.slog();
@@ -144,9 +144,7 @@ function notate(expnum, fp) {
     case 'my':
       if (exp.lt("1e12")) {
         return commaFormat(exp, 2);
-      } else if (exp.slog(10).lt(8) && exp.slog(10).gte(1.5)) {
-        return (exp.toExponential(fp));
-      } else if (exp.slog(10).gte(8) && exp.slog(10).lt(1000)) {
+      } else if (exp.lt("10^^^^^10") && exp.gte("1e12")) {
         return format(exp, 2, small=false);
       } else {
         let str = exp.toHyperE();
@@ -171,6 +169,8 @@ function notate(expnum, fp) {
         return format(exp, 6, small=false);
       else if (exp.lt("E10#2"))
         return format(exp, 6, small=false);
+    case 'test':
+      return (exp.toExponential(fp));
   }
 }
 function repeatLastOperation() {
