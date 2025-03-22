@@ -170,7 +170,7 @@ function notate(expnum, fp) {
       else if (exp.lt("E10#2"))
         return format(exp, 6, small=false);
     case 'test':
-      return (exp.toExponential(fp));
+      return (ExpantaNum(exp));
   }
 }
 function repeatLastOperation() {
