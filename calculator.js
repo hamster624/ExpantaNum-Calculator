@@ -21,7 +21,9 @@ function performOperation(operation) {
         case 'hexate': result = num1.hexate(num2); break;
         case 'factorial': result = num1.factorial(); break;
         case 'sqrt': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(2)); break;
+        case 'cbrt': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(3)); break;
         case 'log': result = num1.log10(); break;
+        case 'ln': result = num1.log(); break;
         case 'slog': result = num1.slog(); break;
         case '2slog': result = num1.slog().slog(); break;
         case 'logb': result = num1.logBase(num2); break;
