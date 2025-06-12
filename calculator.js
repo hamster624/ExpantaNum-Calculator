@@ -60,38 +60,11 @@ function notate(expnum, fp) {
   switch (notationFormat) {
     
     case 'hyper':
-     if (exp.gte("10^^^10")) {
-        return exp.toHyperE()
-      } else {
-        let str = exp.toHyperE();
-        str = str.replace(/#0/g, '');
-        str = str.replace(/(#1)+/g, (match, p1) => {
-          const repeatCount = match.length / p1.length;
-          if (repeatCount === 1) {
-            return '';
-          }
-          return `(#1^${repeatCount})`;
-        });
-        return str;
+      if (exp.gte(ExpantaNum.arrow(10, 20, 10))) {
+          return format(exp, 6, small=false);
       }
-    case 'my':
-      if (exp.lt("1e12")) {
-        return commaFormat(exp, 2);
-      } else if (exp.lt("10^^^^^10") && exp.gte("1e12")) {
-        return format(exp, 2, small=false);
-      } else if (exp.gte("10^^^^^10")) {
-          return exp.toHyperE()
-      } else {
-        let str = exp.toHyperE();
-        str = str.replace(/#0/g, '');
-        str = str.replace(/(#1)+/g, (match, p1) => {
-          const repeatCount = match.length / p1.length;
-          if (repeatCount === 1) {
-            return '';
-          }
-          return `(#1^${repeatCount})`;
-        });
-        return str;
+      else {
+        return exp.toHyperE()
       }
     case 'expanta':
       if (exp.lt("E10#5")&& exp.gte("E10#4"))
