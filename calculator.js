@@ -24,7 +24,7 @@ function performOperation(operation) {
         case 'cbrt': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(3)); break;
         case 'log': result = num1.log10(); break;
         case 'ln': result = num1.log(); break;
-        case 'slog': result = num1.slog(); break;
+        case 'slog': result = num1.slog(num2); break;
         case '2slog': result = num1.slog().slog(); break;
         case 'logb': result = num1.logBase(num2); break;
         case 'custom_sqrt': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2)); break;
@@ -54,7 +54,7 @@ function setNotation(format) {
   }
 }
 
-function notate(expnum, fp) {
+function notate(expnum) {
   const exp = ExpantaNum(expnum);
 
   switch (notationFormat) {
