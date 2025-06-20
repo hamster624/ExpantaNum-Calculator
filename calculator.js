@@ -27,7 +27,7 @@ function performOperation(operation) {
         case 'slog': result = num1.slog(num2); break;
         case '2slog': result = num1.slog().slog(); break;
         case 'logb': result = num1.logBase(num2); break;
-        case 'custom_sqrt': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2)); break;
+        case 'root': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2)); break;
         case 'ssqrt': result = num1.ssqrt(); break;
         case 'expansion': result = ExpantaNum.expansion(num1,num2); break;
         case 'Arrows': result = ExpantaNum.arrow(num1,arrowCount,num2); break;
