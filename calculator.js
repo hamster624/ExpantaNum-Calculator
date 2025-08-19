@@ -59,11 +59,8 @@ function setNotation(format) {
 function plog(num) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
     let pol = polarize(num.array, true);
-    if (ExpantaNum.lt(num,1e10)) {
-        return num.slog().slog().add(1).toString();
-    }
     if (pol.height === 1) {
-        return ExpantaNum.log10(pol.top).add(ExpantaNum.log10(pol.bottom)).add(1).toString();
+        return num.slog().slog().add(1).toString();
     }
     if (pol.height === 3) {
         return ExpantaNum.hexate(ExpantaNum.pent(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
@@ -73,6 +70,7 @@ function plog(num) {
     }
     return ExpantaNum(pol.top).add(ExpantaNum.log10(pol.bottom)).toString(); 
 }
+
 function notate(expnum) {
   const exp = ExpantaNum(expnum);
 
