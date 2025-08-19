@@ -29,6 +29,7 @@ function performOperation(operation) {
         case 'logb': result = num1.logBase(num2); break;
         case 'root': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2)); break;
         case 'ssqrt': result = num1.ssqrt(); break;
+        case 'plog': result = plog(num1); break;
         case 'expansion': result = ExpantaNum.expansion(num1,num2); break;
         case 'Arrows': result = ExpantaNum.arrow(num1,arrowCount,num2); break;
     }
@@ -54,6 +55,24 @@ function setNotation(format) {
   }
 }
 
+// used all my brain power to make this work
+function plog(num) {
+    if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
+    let pol = polarize(num.array, true);
+    if (ExpantaNum.lt(num,1e10)) {
+        return num.slog().slog().add(1).toString();
+    }
+    if (pol.height === 1) {
+        return ExpantaNum.log10(pol.top).add(ExpantaNum.log10(pol.bottom)).add(1).toString();
+    }
+    if (pol.height === 3) {
+        return ExpantaNum.hexate(ExpantaNum.pent(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
+    }
+    if (pol.height >= 4) {
+        return num.toString();
+    }
+    return ExpantaNum(pol.top).add(ExpantaNum.log10(pol.bottom)).toString(); 
+}
 function notate(expnum) {
   const exp = ExpantaNum(expnum);
 
@@ -67,16 +86,7 @@ function notate(expnum) {
         return exp.toHyperE()
       }
     case 'expanta':
-      if (exp.lt("E10#5")&& exp.gte("E10#4"))
-        return "eeee" + (exp.log10().log10().log10().log10());
-      else if (exp.lt("E10#4")&& exp.gte("E10#3"))
-        return "eee" + (exp.log10().log10().log10());
-      else if (exp.lt("E10#3")&& exp.gte("E10#2"))
-        return "ee" + (exp.log10().log10());
-      else if (exp.gte("E10#5"))
-        return format(exp, 6, small=false);
-      else if (exp.lt("E10#2"))
-        return format(exp, 6, small=false);
+      return format(exp, 6, small=false);
     case 'test':
       return (ExpantaNum(exp));
   }
