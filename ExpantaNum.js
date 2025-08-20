@@ -1,4 +1,3 @@
-
 !function(r) {
     "use strict";
     var e = {
@@ -436,7 +435,7 @@
         return this.rec()
     }
     ,
-    s.gamma = function(r) {
+    s.gamma = function(r) { 
         return new e(r).gamma()
     }
     ,
@@ -801,97 +800,12 @@
     s.hexate = s.hexate = function(r, t) {
         return e.arrow(r, 4, t);
     },
-    o.heptate = o.heptate = function(r) {
-        return this.arrow(5)(r);
-    },
     s.heptate = s.heptate = function(r, t) {
         return e.arrow(r, 5, t);
     },
-    o.octate = o.octate = function(r) {
-        return this.arrow(6)(r);
-    },
     s.octate = s.octate = function(r, t) {
         return e.arrow(r, 6, t);
-    },
-    o.nonate = o.nonate = function(r) {
-        return this.arrow(7)(r);
-    },
-    s.nonate = s.nonate = function(r, t) {
-        return e.arrow(r, 7, t);
-    },
-    o.decate = o.decate = function(r) {
-        return this.arrow(8)(r);
-    },
-    s.decate = s.decate = function(r, t) {
-        return e.arrow(r, 8, t);
-    },
-    o.unodecate = o.unodecate = function(r) {
-        return this.arrow(9)(r);
-    },
-    s.unodecate = s.unodecate = function(r, t) {
-        return e.arrow(r, 9, t);
-    },
-    o.dodecate = o.dodecate = function(r) {
-        return this.arrow(10)(r);
-    },
-    s.dodecate = s.dodecate = function(r, t) {
-        return e.arrow(r, 10, t);
-    },
-    o.tridocate = o.tridocate = function(r) {
-        return this.arrow(11)(r);
-    },
-    s.tridocate = s.tridocate = function(r, t) {
-        return e.arrow(r, 11, t);
-    },
-    o.quadocate = o.quadocate = function(r) {
-        return this.arrow(12)(r);
-    },
-    s.quadocate = s.quadocate = function(r, t) {
-        return e.arrow(r, 12, t);
-    },
-    o.quindecate = o.quindecate = function(r) {
-        return this.arrow(13)(r);
-    },
-    s.quindecate = s.quindecate = function(r, t) {
-        return e.arrow(r, 13, t);
-    },
-    o.sedecate = o.sedecate = function(r) {
-        return this.arrow(14)(r);
-    },
-    s.sedecate = s.sedecate = function(r, t) {
-        return e.arrow(r, 14, t);
-    },
-    o.septendecate = o.septendecate = function(r) {
-        return this.arrow(15)(r);
-    },
-    s.septendecate = s.septendecate = function(r, t) {
-        return e.arrow(r, 15, t);
-    },
-    o.big = o.big = function(r) {
-        return this.arrow(1000)(r);
-    },
-    s.big = s.big = function(r, t) {
-        return e.arrow(r, 1000, t);
-    },
-    o.big2 = o.big2 = function(r) {
-        return this.arrow(10000)(r);
-    },
-    s.big2 = s.big2 = function(r, t) {
-        return e.arrow(r, 10000, t);
-    },
-    o.big3 = o.big3 = function(r) {
-        return this.arrow(100000)(r);
-    },
-    s.big3 = s.big3 = function(r, t) {
-        return e.arrow(r, 100000, t);
-    },
-    o.big4 = o.big4 = function(r) {
-        return this.arrow(1000000)(r);
-    },
-    s.big4 = s.big4 = function(r, t) {
-        return e.arrow(r, 1000000, t);
     };
-    
     o.arrow = function(r) {
         var t = this.clone();
         return !(r = new e(r)).isint() || r.lt(e.ZERO) ? function(r) {
@@ -1569,4 +1483,3 @@
     }) : "undefined" != typeof module && module.exports ? module.exports = e : (r || (r = "undefined" != typeof self && self && self.self == self ? self : Function("return this")()),
     r.ExpantaNum = e)
   }(this);
-  
