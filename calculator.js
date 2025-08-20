@@ -30,6 +30,7 @@ function performOperation(operation) {
         case 'root': result = ExpantaNum(10).pow(ExpantaNum(num1).log10().div(num2)); break;
         case 'ssqrt': result = num1.ssqrt(); break;
         case 'plog': result = plog(num1); break;
+        case 'hlog': result = hlog(num1); break; 
         case 'expansion': result = ExpantaNum.expansion(num1,num2); break;
         case 'Arrows': result = ExpantaNum.arrow(num1,arrowCount,num2); break;
     }
@@ -59,16 +60,33 @@ function setNotation(format) {
 function plog(num) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
     let pol = polarize(num.array, true);
-    if (pol.height === 1) {
+    if (ExpantaNum.eq(pol.height, 1)) {
         return num.slog().slog().add(1).toString();
     }
-    if (pol.height === 3) {
+    if (ExpantaNum.eq(pol.height, 3)) {
         return ExpantaNum.hexate(ExpantaNum.pent(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
     }
-    if (pol.height >= 4) {
+    if (ExpantaNum.gte(pol.height, 4)) {
         return num.toString();
     }
     return ExpantaNum(pol.top).add(ExpantaNum.log10(pol.bottom)).toString(); 
+}
+// this one was easier
+function hlog(num) {
+    if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
+    let pol = polarize(num.array, true);
+    if (ExpantaNum.lte(num, "10^^^10")) {
+        return ExpantaNum(plog(plog(num))).add(1).toString();
+    }
+    if (ExpantaNum.gt(num, "10^^^10") && ExpantaNum.lt(num, "10^^^^10")) {
+        return ExpantaNum.log10(pol.bottom).add(pol.top).toString();
+    }
+    if (ExpantaNum.eq(pol.height, 4)) {
+        return ExpantaNum.octate(ExpantaNum.heptate(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
+    }
+    if (ExpantaNum.gte(pol.height, 5)) {
+      return num.toString();
+    }
 }
 
 function notate(expnum) {
