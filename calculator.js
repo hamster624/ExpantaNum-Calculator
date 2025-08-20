@@ -55,7 +55,7 @@ function setNotation(format) {
     performOperation(lastOperation.operation);
   }
 }
-
+// btw if you are going to steal this at least credit the creators github account: hamster624
 // used all my brain power to make this work
 function plog(num) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
