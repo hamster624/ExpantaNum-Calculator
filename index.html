@@ -54,8 +54,7 @@
       <button onclick="performOperation('heplog')"> Hepta log</button>
       <button onclick="performOperation('olog')"> Octa log</button>
       <button onclick="performOperation('ultralog')"> Custom log (max 20)</button>
-      <button onclick="performOperation('expansion')"> Expansion? idk</button>
-      <button onclick="showNotationGuide()">Notation Guide</button>
+      <button onclick="performOperation('expansion')"> Expansion</button>
       
     </div>
 
@@ -65,7 +64,9 @@
     </div>
     <div class="notation-toggle">
       <button onclick="toggleNotationPopup()">Change Notation</button>
-    </div>    
+      <button onclick="showGuide()">Guide</button>
+    </div> 
+
     <div class="notation-popup" id="notationPopup">
       <button onclick="setNotation('expanta')">ExpantaNum Format (default)</button>
       <button onclick="setNotation('hyper')">Hyper</button>
@@ -78,9 +79,19 @@
   <div id="notationModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeGuide()">×</span>
+      <h2>Log Guide</h2>
+      <p>Slog is a tetration version of log so slog(10^^20)=20.</p>
+      <p>Penta log is basically the same as slog but instead of 10^^x its 10^^^x. Same with Hexa log which is 10^^^^x or Hepta log or Octa log.</p>
+      <p>Custom log lets you input how many arrows the log would have so if number 2 is 5 it would be Hepta log because Heptation has 5 arrows. Max is 20 arrows.</p>
       <h2>Notation Guide</h2>
       <p>Hyper-e-E100#2 baically means 10^10^100 E100#3= 10^10^10^100 or 10^^1e100=E100#1#2 and 10^^ee100=E100#2#2.</p>
       <p>1.00F4 basically means eee10 or eeee1.</p>
+      <h2>Operation Guide</h2>
+      <p>Tetration is repeated exponentiation where 3^^3=3^3^3. Pentation is repeated tetration and so on.</p>
+      <p>Arrow operation lets you set what level of exponentiation so 1 would be exponentiate, 2 would be tetrate and so on.</p>
+      <p>ssqrt is sqrt but with tetration so ssqrt(10)=2.506 because 2.506^^2=10.</p>
+      <p>root lets you adjust how many times the number is rooted by so root(10,3) is 2.154 because 2.154^3=10.</p>
+      <p>Don't ask me how expansion works.</p>
     </div>
   </div>
 
