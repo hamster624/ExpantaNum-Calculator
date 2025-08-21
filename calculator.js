@@ -124,6 +124,7 @@ function olog(num) {
     }
 }
 // yeah okay i wont be rewriting the code each time so uhh here is ultra log
+// also i would recommend not going over 8 if you are making a game because holy it lags a lot so use maybe plog or hlog because those wont lag that bad
 function ultralog(num, arrows) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
     let pol = polarize(num.array, true);
@@ -191,3 +192,4 @@ function repeatLastOperation() {
 }
 
 repeatLastOperation();
+
