@@ -31,6 +31,7 @@ function performOperation(operation) {
         case 'ssqrt': result = num1.ssqrt(); break;
         case 'plog': result = plog(num1); break;
         case 'hlog': result = hlog(num1); break; 
+        case 'heplog': result = heplog(num1); break; 
         case 'expansion': result = ExpantaNum.expansion(num1,num2); break;
         case 'Arrows': result = ExpantaNum.arrow(num1,arrowCount,num2); break;
     }
@@ -82,13 +83,29 @@ function hlog(num) {
         return ExpantaNum.log10(pol.bottom).add(pol.top).toString();
     }
     if (ExpantaNum.eq(pol.height, 4)) {
-        return ExpantaNum.octate(ExpantaNum.heptate(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
+        return ExpantaNum.heptate(ExpantaNum.hexate(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
     }
     if (ExpantaNum.gte(pol.height, 5)) {
       return num.toString();
     }
 }
-
+// i think i have too much logs
+function heplog(num) {
+    if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
+    let pol = polarize(num.array, true);
+    if (ExpantaNum.lte(num, "10^^^^10")) {
+        return ExpantaNum(plog(hlog(num))).add(1).toString();
+    }
+    if (ExpantaNum.lt(num, "10^^^^^10") && ExpantaNum.gte(num, "10^^^^10")) {
+        return ExpantaNum.log10(pol.bottom).add(pol.top).toString();
+    }
+    if (ExpantaNum.eq(pol.height, 5)) {
+      return ExpantaNum.octate(ExpantaNum.heptate(10,pol.bottom), ExpantaNum(pol.top).sub(1)).toString();
+    }
+    if (ExpantaNum.gt(pol.height, 5)) {
+      return num.toString();
+    }
+}
 function notate(expnum) {
   const exp = ExpantaNum(expnum);
 
