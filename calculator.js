@@ -50,14 +50,14 @@ function toggleNotationPopup() {
 function setNotation(format) {
   notationFormat = format;
   toggleNotationPopup();
-
-  const resultElement = document.getElementById("result");
   if (lastOperation) {
     performOperation(lastOperation.operation);
   }
 }
-// btw if you are going to steal this at least credit the creators github account: hamster624
-// used all my brain power to make this work
+// you are probably looking here because you want the larger levels of log, right?
+// if you are going to steal this, then at least credit the creators github account: hamster624
+// because i used all my brain power to make this work
+// btw you need polarize for this to work which is in the file "format.js" and need to get octate and other stuff which i have in "ExpantaNum.js"
 function plog(num) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
     let pol = polarize(num.array, true);
@@ -106,7 +106,7 @@ function heplog(num) {
       return num.toString();
     }
 }
-// not enough logs
+// 1 more cant hurt
 function olog(num) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
     let pol = polarize(num.array, true);
