@@ -11,29 +11,20 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="title">A Large Number Calculator</h1>
+    <h1 class="title">Calculator</h1>
 
     <div class="input-group-container">
       <div class="input-group">
         <label for="num1">Number 1:</label>
         <input type="text" id="num1" value="10" />
       </div>
-
-      <div class="input-group-scale" id="scaleButtonContainer">
-        <button onclick="toggleScalePopup()">Change GUI Size</button>
-      </div>
-    </div>
-
-    <div class="scale-popup" id="scalePopup">
-      <button onclick="changeScale(0.8)">70%</button>
-      <button onclick="changeScale(1.15)">100%</button>
-      <button onclick="changeScale(1.875)">150%</button>
     </div>
 
     <div class="input-group">
       <label for="num2">Number 2:</label>
       <input type="text" id="num2" value="5" />
     </div>
+  
   <div class="input-group">
     <label for="arrowCount">Number of Arrows:</label>
     <input type="text" id="arrowCount" value="5" min="1" />
@@ -80,16 +71,13 @@
       <button onclick="setNotation('hyper')">Hyper</button>
       <button onclick="setNotation('test')">ExpantaNum's built in notation</button>
     </div>    
-    <div class="theme-toggle">
-      <button onclick="toggleTheme()">Toggle Black/White Theme</button>
-    </div>  
   <div class="discord-link">
-    <a href="https://discord.gg/xAmHhcXTJZ" target="_blank">Join our Discord Server</a>
+    <a href="https://discord.gg/xAmHhcXTJZ" target="_blank">Join my Discord Server</a>
   </div>
   </div>
   <div id="notationModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeNotationGuide()">×</span>
+      <span class="close-btn" onclick="closeGuide()">×</span>
       <h2>Notation Guide</h2>
       <p>Hyper-e-E100#2 baically means 10^10^100 E100#3= 10^10^10^100 or 10^^1e100=E100#1#2 and 10^^ee100=E100#2#2.</p>
       <p>1.00F4 basically means eee10 or eeee1.</p>
@@ -97,69 +85,11 @@
   </div>
 
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle("light-theme");
-    }
-
-    function toggleScalePopup() {
-      const popup = document.getElementById("scalePopup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-    }
-
-    function changeScale(scale) {
-      const container = document.querySelector('.container');
-      container.style.transform = `scale(${scale})`;
-      document.querySelector('#scalePopup').style.display = 'none';
-    }
-
-    window.onload = function() {
-      changeScale(1.15);
-      showDeviceModal();
-    };
-
-    function showDeviceModal() {
-      const modal = document.createElement('div');
-      modal.classList.add('grayscale');
-
-      modal.innerHTML = `
-        <div class="device-modal">
-          <h2>Are you on a PC?</h2>
-          <button onclick="setDeviceType('pc')">Yes, I'm on PC</button>
-          <button onclick="setDeviceType('not-pc')">No, I'm not on PC</button>
-        </div>
-      `;
-      document.body.appendChild(modal);
-    }
-
-    function setDeviceType(type) {
-      const modal = document.querySelector('.grayscale');
-      modal.remove();
-      if (type === 'not-pc') {
-        changeScale(0.8);
-        adjustForNonPC();
-        hideScaleButton();
-      }
-    }
-
-    function adjustForNonPC() {
-      const container = document.querySelector('.container');
-      container.style.fontSize = '0.8em';
-      document.querySelectorAll('button').forEach(button => {
-        button.style.fontSize = '0.8em';
-        button.style.padding = '8px 10px';
-      });
-    }
-
-    function hideScaleButton() {
-      const scaleButton = document.getElementById("scaleButtonContainer");
-      scaleButton.style.display = "none";
-    }
-
-    function showNotationGuide() {
+    function showGuide() {
       document.getElementById('notationModal').style.display = 'block';
     }
 
-    function closeNotationGuide() {
+    function closeGuide() {
       document.getElementById('notationModal').style.display = 'none';
     }
   </script>
