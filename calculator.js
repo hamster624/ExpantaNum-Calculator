@@ -32,6 +32,8 @@ function performOperation(operation) {
         case 'plog': result = plog(num1); break;
         case 'hlog': result = hlog(num1); break; 
         case 'heplog': result = heplog(num1); break; 
+        case 'olog': result = olog(num1); break; 
+        case 'ultralog': result = ultralog(num1, num2); break; 
         case 'expansion': result = ExpantaNum.expansion(num1,num2); break;
         case 'Arrows': result = ExpantaNum.arrow(num1,arrowCount,num2); break;
     }
@@ -39,8 +41,6 @@ function performOperation(operation) {
   document.getElementById("result").textContent = `${notate(result, 6)}`;
   lastOperation = { operation, num1: num1Str, num2: num2Str };
 }
-
-
 
 function toggleNotationPopup() {
   const popup = document.getElementById("notationPopup");
@@ -94,7 +94,7 @@ function heplog(num) {
     if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
     let pol = polarize(num.array, true);
     if (ExpantaNum.lte(num, "10^^^^10")) {
-        return ExpantaNum(plog(hlog(num))).add(1).toString();
+        return ExpantaNum(hlog(num)).log10().add(1).toString();
     }
     if (ExpantaNum.lt(num, "10^^^^^10") && ExpantaNum.gte(num, "10^^^^10")) {
         return ExpantaNum.log10(pol.bottom).add(pol.top).toString();
@@ -104,6 +104,64 @@ function heplog(num) {
     }
     if (ExpantaNum.gt(pol.height, 5)) {
       return num.toString();
+    }
+}
+// not enough logs
+function olog(num) {
+    if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
+    let pol = polarize(num.array, true);
+    if (ExpantaNum.lte(num, "10^^^^^10")) {
+        return ExpantaNum(heplog(num)).log10().add(1).toString();
+    }
+    if (ExpantaNum.lt(num, "10^^^^^^10") && ExpantaNum.gte(num, "10^^^^^10")) {
+        return ExpantaNum.log10(pol.bottom).add(pol.top).toString();
+    }
+    if (ExpantaNum.eq(pol.height, 6)) {
+      return ExpantaNum.arrow(ExpantaNum.arrow(10,6,pol.bottom), 7, ExpantaNum(pol.top).sub(1)).toString();
+    }
+    if (ExpantaNum.gt(pol.height, 6)) {
+      return num.toString();
+    }
+}
+// yeah okay i wont be rewriting the code each time so uhh here is ultra log
+function ultralog(num, arrows) {
+    if (!(num instanceof ExpantaNum)) num = new ExpantaNum(num);
+    let pol = polarize(num.array, true);
+    num = num.array;
+    if (ExpantaNum.eq(arrows, 1)){
+      return ExpantaNum.log10(num).toString();
+    }
+    if (ExpantaNum.eq(arrows, 2)){
+      return ExpantaNum.slog(num).toString();
+    }
+    if (ExpantaNum.eq(arrows, 3)){
+      return plog(num);
+    }
+    if (ExpantaNum.eq(arrows, 4)){
+      return hlog(num);
+    }
+    if (ExpantaNum.eq(arrows, 5)){
+      return heplog(num);
+    }
+    if (ExpantaNum.eq(arrows, 6)){
+      return olog(num);
+    }
+    if (ExpantaNum.gt(arrows, 6) && ExpantaNum.lte(arrows,20)){
+      if (ExpantaNum.lte(num, ExpantaNum.arrow(10, ExpantaNum(arrows).sub(1), 10))) {
+        return ExpantaNum(ultralog(ExpantaNum(num), ExpantaNum(arrows).sub(1))).log10().add(1).toString();
+      }
+      if (ExpantaNum.lt(num, ExpantaNum.arrow(10, ExpantaNum(arrows), 10)) && ExpantaNum.gte(num, ExpantaNum.arrow(10, ExpantaNum(arrows).sub(1), 10))) {
+        return ExpantaNum.log10(pol.bottom).add(pol.top).toString();
+      }
+      if (ExpantaNum.eq(arrows, pol.height)) {
+        return ExpantaNum.arrow(ExpantaNum.arrow(10,ExpantaNum(arrows),pol.bottom), ExpantaNum(arrows).add(1), ExpantaNum(pol.top).sub(1)).toString();
+      }
+      if (ExpantaNum.gt(pol.height, arrows)) {
+        return ExpantaNum(num).toString();
+      }
+    }
+    if (ExpantaNum.gt(arrows, 20)){
+      throw Error("Max 20 arrows due to precision");
     }
 }
 function notate(expnum) {
@@ -129,7 +187,7 @@ function repeatLastOperation() {
     if (lastOperation) {
       performOperation(lastOperation.operation);
     }
-  }, 10);
+  }, 17);
 }
 
 repeatLastOperation();
